@@ -11,6 +11,7 @@ function App() {
   return (
     <div>
       <h1>Restaurant Dashboard</h1>
+      <p>Hello</p>
       <TableList tables={tables} setTables={setTables} />
     </div>
   );
