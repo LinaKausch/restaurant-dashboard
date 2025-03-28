@@ -1,24 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Table({ table, assignWaiter, menuItems, onOrderClick }) {
-    const [waiterName, setWaiterName] = useState("");
-    const [numPeople, setNumPeople] = useState(table.numPeople || 0);
-
-    const handleAssignWaiter = () => {
-        if (waiterName) {
-            assignWaiter(waiterName, table.number);
-            setWaiterName("");
-        }
-    };
-
-    const handlePeopleChange = (e) => {
-        const value = e.target.value;
-        setNumPeople(value);
-    };
+function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, updateNumPeople, waiters }) {
 
     const calculateTotalBill = () => {
         return Object.entries(table.orders).reduce((total, [orderName, quantity]) => {
-            const menuItem = menuItems.find(item => item.name === orderName);  // Find the menu item
+            const menuItem = menuItems.find(item => item.name === orderName);
             if (menuItem) {
                 total += menuItem.price * quantity;
             }
@@ -30,24 +16,28 @@ function Table({ table, assignWaiter, menuItems, onOrderClick }) {
         <div>
             <h3>Table {table.number}</h3>
             <p>Assigned Waiter: {table.waiter || "No waiter assigned"}</p>
-            <p>Guests {numPeople} </p>
+            <p>Guests {table.numPeople} </p>
 
             <button onClick={onOrderClick}>Add Order</button>
 
-            <input
-                type="text"
-                value={waiterName}
-                onChange={(e) => setWaiterName(e.target.value)}
-                placeholder="Enter Waiter's Name"
-            />
-            <button onClick={handleAssignWaiter}>Assign Waiter</button>
+            <label>Assign Waiter:</label>
+            <select
+                value={table.waiter}
+                onChange={(e) => assignWaiter(e.target.value, table.number)}
+            >
+                <option value="">-- Select Waiter --</option>
+                {waiters.map((waiter, index) => (
+                    <option key={index} value={waiter}>{waiter}</option>
+                ))}
+            </select>
+
 
             <div>
                 <label>Number of Guests: </label>
                 <input
                     type="number"
-                    value={numPeople}
-                    onChange={handlePeopleChange}
+                    value={table.numPeople}
+                    onChange={(e) => updateNumPeople(table.number, e.target.value)}
                     min="0"
                     placeholder="Enter number of guests"
                 />
@@ -73,6 +63,10 @@ function Table({ table, assignWaiter, menuItems, onOrderClick }) {
             <div>
                 <p><strong>Total Bill: ${calculateTotalBill()}</strong></p>
             </div>
+
+            {Object.keys(table.orders).length > 0 && (
+                <button onClick={() => handlePay(table.number)}>💸 Pay & Clear Table</button>
+            )}
         </div>
     );
 }

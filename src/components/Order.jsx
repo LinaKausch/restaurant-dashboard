@@ -56,7 +56,9 @@ function Order({ orderingTable, tables, setTables, menuItems }) {
             <h2>Ordering for Table {orderingTable}</h2>
 
             <ul>
-                {menuItems.map((item) => {
+                {menuItems
+                .filter(item => item.available)
+                .map((item) => {
                     const orderCount = currentTable?.orders[item.name] || 0;
 
                     return (

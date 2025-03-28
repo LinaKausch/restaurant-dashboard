@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./Table";
 
-function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder }) {
+function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, handlePay, updateNumPeople, waiters }) {
 
   const assignWaiter = (name, tableNumber) => {
     setTables((prevTables) =>
@@ -13,15 +13,7 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder }
     );
   };
 
-  const updateNumPeople = (numPeople, tableNumber) => {
-    setTables((prevTables) =>
-      prevTables.map((table) =>
-        table.number === tableNumber
-          ? { ...table, numPeople }
-          : table
-      )
-    );
-  };
+
 
   return (
     <div>
@@ -30,12 +22,14 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder }
         <Table
           key={table.number}
           table={table}
+          waiters={waiters}
           assignWaiter={assignWaiter}
           updateNumPeople={updateNumPeople}
           setOrderingTable={setOrderingTable}
           menuItems={menuItems}
           onOrderClick={() => openOrder(table.number)}
           openOrder={openOrder}
+          handlePay={handlePay}
         />
       ))}
     </div>

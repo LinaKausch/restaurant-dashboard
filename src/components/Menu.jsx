@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Menu.css";
 
 function Menu({ menuItems, setMenuItems }) {
 
@@ -20,6 +21,17 @@ function Menu({ menuItems, setMenuItems }) {
         setNewItemPrice("");
     };
 
+    const toggleAvailability = (id) => {
+        setMenuItems(prev =>
+            prev.map(item =>
+                item.id === id
+                    ? { ...item, available: !item.available }
+                    : item
+            )
+        );
+    };
+
+
     return (
         <div>
             <h2>Menu</h2>
@@ -28,6 +40,19 @@ function Menu({ menuItems, setMenuItems }) {
                     return (
                         <li key={item.id}>
                             {item.name} - ${item.price}
+                            <label className="switch">
+                                <input
+                                    type="checkbox"
+                                    checked={item.available}
+                                    onChange={() => toggleAvailability(item.id)}
+                                />
+                                <span className="slider">
+                                </span>
+                            </label>
+                            {/* {item.available ? " ✅" : " ❌"}
+                            <button onClick={() => toggleAvailability(item.id)}>
+                                {item.available ? "Mark Unavailable" : "Mark Available"}
+                            </button> */}
                         </li>
                     )
                 })}
