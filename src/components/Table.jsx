@@ -18,7 +18,12 @@ function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, update
             <p>Assigned Waiter: {table.waiter || "No waiter assigned"}</p>
             <p>Guests {table.numPeople} </p>
 
-            <button onClick={onOrderClick}>Add Order</button>
+            <button
+                onClick={onOrderClick}
+                disabled={!table.waiter || table.numPeople <= 0}
+            >
+                Add Order
+            </button>
 
             <label>Assign Waiter:</label>
             <select
