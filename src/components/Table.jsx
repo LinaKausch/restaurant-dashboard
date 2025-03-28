@@ -32,7 +32,7 @@ function Table({ table, assignWaiter, menuItems, onOrderClick }) {
             <p>Assigned Waiter: {table.waiter || "No waiter assigned"}</p>
             <p>Guests {numPeople} </p>
 
-            <button onClick={() => onOrderClick }>Add Order</button>
+            <button onClick={onOrderClick}>Add Order</button>
 
             <input
                 type="text"

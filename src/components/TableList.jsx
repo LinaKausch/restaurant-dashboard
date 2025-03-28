@@ -35,6 +35,7 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder }
           setOrderingTable={setOrderingTable}
           menuItems={menuItems}
           onOrderClick={() => openOrder(table.number)}
+          openOrder={openOrder}
         />
       ))}
     </div>

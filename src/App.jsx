@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TableList from "./components/TableList";
 import Order from "./components/Order";
+import Menu from "./components/Menu";
 
 function App() {
   const [tables, setTables] = useState([
@@ -10,12 +11,12 @@ function App() {
     { number: 3, waiter: "", numPeople: 0, orders: {} },
   ]);
 
-  const menuItems = [
+  const [menuItems, setMenuItems] = useState([
     { id: 1, name: "Steak", price: 20 },
     { id: 2, name: "Pasta", price: 15 },
     { id: 3, name: "Salad", price: 10 },
     { id: 4, name: "Wine", price: 8 },
-  ];
+  ]);
 
   const [orderingTable, setOrderingTable] = useState(null);
 
@@ -41,7 +42,6 @@ function App() {
               <TableList
                 tables={tables}
                 setTables={setTables}
-                setOrderingTable={setOrderingTable}
                 menuItems={menuItems}
                 openOrder={openOrder}
               />
@@ -49,11 +49,14 @@ function App() {
           />
           <Route
             path="/menu"
-            element={<h2>Menu Page (Coming Soon)</h2>}
+            element={<Menu
+              menuItems={menuItems}
+              setMenuItems={setMenuItems}
+            />}
           />
         </Routes>
         {orderingTable !== null && (
-          <Order orderingTable={orderingTable} tables={tables} setTables={setTables} menuItems={menuItems} closeOrder = {closeOrder}/>
+          <Order orderingTable={orderingTable} tables={tables} setTables={setTables} menuItems={menuItems} closeOrder={closeOrder} />
         )}
       </div>
     </Router>
