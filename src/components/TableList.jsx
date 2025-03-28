@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./Table";
 
-function TableList({ tables, setTables, setOrderingTable, menuItems }) {
+function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder }) {
 
   const assignWaiter = (name, tableNumber) => {
     setTables((prevTables) =>
@@ -34,6 +34,7 @@ function TableList({ tables, setTables, setOrderingTable, menuItems }) {
           updateNumPeople={updateNumPeople}
           setOrderingTable={setOrderingTable}
           menuItems={menuItems}
+          onOrderClick={() => openOrder(table.number)}
         />
       ))}
     </div>

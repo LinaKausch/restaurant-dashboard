@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TableList from "./components/TableList";
-import Menu from "./components/Menu";
+import Order from "./components/Order";
 
 function App() {
   const [tables, setTables] = useState([
@@ -18,14 +19,44 @@ function App() {
 
   const [orderingTable, setOrderingTable] = useState(null);
 
+  const openOrder = (tableNumber) => setOrderingTable(tableNumber);
+  const closeOrder = () => setOrderingTable(null);
+
   return (
-    <div>
-      <h1>Restaurant Dashboard</h1>
-      <TableList tables={tables} setTables={setTables} setOrderingTable={setOrderingTable} menuItems={menuItems} />
-      {orderingTable !== null && (
-        <Menu orderingTable={orderingTable} tables ={tables} setTables ={setTables} menuItems = {menuItems}/>
-      )}
-    </div>
+    <Router basename="/restaurant-dashboard">
+      <nav>
+        <ul>
+          <li><Link to="/">Table List</Link></li>
+          <li><Link to="/menu">Menu</Link></li>
+          <li><Link to="/leaderboard">Leaderboard</Link></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h1>Restaurant Dashboard</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TableList
+                tables={tables}
+                setTables={setTables}
+                setOrderingTable={setOrderingTable}
+                menuItems={menuItems}
+                openOrder={openOrder}
+              />
+            }
+          />
+          <Route
+            path="/menu"
+            element={<h2>Menu Page (Coming Soon)</h2>}
+          />
+        </Routes>
+        {orderingTable !== null && (
+          <Order orderingTable={orderingTable} tables={tables} setTables={setTables} menuItems={menuItems} closeOrder = {closeOrder}/>
+        )}
+      </div>
+    </Router>
   );
 }
 

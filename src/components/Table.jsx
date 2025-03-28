@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Table({ table, assignWaiter, setOrderingTable, menuItems }) {
+function Table({ table, assignWaiter, menuItems, onOrderClick }) {
     const [waiterName, setWaiterName] = useState("");
     const [numPeople, setNumPeople] = useState(table.numPeople || 0);
 
@@ -32,8 +32,7 @@ function Table({ table, assignWaiter, setOrderingTable, menuItems }) {
             <p>Assigned Waiter: {table.waiter || "No waiter assigned"}</p>
             <p>Guests {numPeople} </p>
 
-            <button onClick={() => setOrderingTable(table.number)}>Add Order</button>
-
+            <button onClick={() => onOrderClick }>Add Order</button>
 
             <input
                 type="text"
