@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-function Table({ table, assignWaiter, setOrderingTable }) {
+function Table({ table, assignWaiter, setOrderingTable, menuItems }) {
     const [waiterName, setWaiterName] = useState("");
     const [numPeople, setNumPeople] = useState(table.numPeople || 0);
-    // const [order, setOrder] = useState("");
 
     const handleAssignWaiter = () => {
         if (waiterName) {
@@ -15,6 +14,16 @@ function Table({ table, assignWaiter, setOrderingTable }) {
     const handlePeopleChange = (e) => {
         const value = e.target.value;
         setNumPeople(value);
+    };
+
+    const calculateTotalBill = () => {
+        return Object.entries(table.orders).reduce((total, [orderName, quantity]) => {
+            const menuItem = menuItems.find(item => item.name === orderName);  // Find the menu item
+            if (menuItem) {
+                total += menuItem.price * quantity;
+            }
+            return total;
+        }, 0);
     };
 
     return (
@@ -46,17 +55,24 @@ function Table({ table, assignWaiter, setOrderingTable }) {
             </div>
             <div>
                 <p>Order:</p>
+
                 <ul>
-                    {table.orders.length > 0 ? (
-                        table.orders.map((order, index) => (
-                            <li key={index}>
-                                {order.name} - ${order.price}
-                            </li>
-                        ))
+                    {Object.entries(table.orders).length > 0 ? (
+                        Object.entries(table.orders).map(([orderName, quantity]) => {
+                            const menuItem = menuItems.find(item => item.name === orderName);
+                            return menuItem ? (
+                                <li key={orderName}>
+                                    {orderName} - ${menuItem.price} x {quantity} = ${menuItem.price * quantity}
+                                </li>
+                            ) : null;
+                        })
                     ) : (
                         <p>No orders yet</p>
                     )}
                 </ul>
+            </div>
+            <div>
+                <p><strong>Total Bill: ${calculateTotalBill()}</strong></p>
             </div>
         </div>
     );

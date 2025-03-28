@@ -9,14 +9,21 @@ function App() {
     { number: 3, waiter: "", numPeople: 0, orders: {} },
   ]);
 
+  const menuItems = [
+    { id: 1, name: "Steak", price: 20 },
+    { id: 2, name: "Pasta", price: 15 },
+    { id: 3, name: "Salad", price: 10 },
+    { id: 4, name: "Wine", price: 8 },
+  ];
+
   const [orderingTable, setOrderingTable] = useState(null);
 
   return (
     <div>
       <h1>Restaurant Dashboard</h1>
-      <TableList tables={tables} setTables={setTables} setOrderingTable={setOrderingTable} />
+      <TableList tables={tables} setTables={setTables} setOrderingTable={setOrderingTable} menuItems={menuItems} />
       {orderingTable !== null && (
-        <Menu orderingTable={orderingTable} tables ={tables} setTables ={setTables}/>
+        <Menu orderingTable={orderingTable} tables ={tables} setTables ={setTables} menuItems = {menuItems}/>
       )}
     </div>
   );

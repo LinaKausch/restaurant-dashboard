@@ -1,12 +1,7 @@
 import React from "react";
 
-function Menu({ orderingTable, tables, setTables }) {
-    const menuItems = [
-        { id: 1, name: "Steak", price: 20 },
-        { id: 2, name: "Pasta", price: 15 },
-        { id: 3, name: "Salad", price: 10 },
-        { id: 4, name: "Wine", price: 8 },
-    ]
+function Menu({ orderingTable, tables, setTables, menuItems }) {
+
 
     const addOrder = (item) => {
         setTables((prevTables) =>
@@ -36,20 +31,20 @@ function Menu({ orderingTable, tables, setTables }) {
                         }
                     }
                     : table
-            )
-        );
-    };
+            ).map((table) => {
 
-    const confirmOrder = () => {
-        setTables((prevTables) =>
-            prevTables.map((table) =>
-                table.number === orderingTable
-                    ? {
-                        ...table,
-                        orderConfirmed: true,  
+                if (table.number === orderingTable) {
+                    const newOrders = { ...table.orders };
+                    if (newOrders[item] === undefined) {
+                        delete newOrders[item];
                     }
-                    : table
-            )
+                    return {
+                        ...table,
+                        orders: newOrders,
+                    };
+                }
+                return table;
+            })
         );
     };
 
@@ -74,7 +69,6 @@ function Menu({ orderingTable, tables, setTables }) {
                     );
                 })}
             </ul>
-            <button onClick={confirmOrder}>Order</button>
         </div>
     );
 }
