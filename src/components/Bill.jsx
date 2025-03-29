@@ -17,18 +17,29 @@ function Payment({
         <div className="modal-overlay">
             <div className="modal-content">
                 <h2>Bill</h2>
-                <h3>Order Summary:</h3>
-                <ul>
+                <p className="">Order Summary:</p>
+                <ul className="bill-list">
+                    <li className="bill-row header">
+                        <span>Item</span>
+                        <span>Unit</span>
+                        <span>Qty</span>
+                        <span>Total</span>
+                    </li>
                     {Object.entries(table.orders).map(([itemName, qty]) => {
                         const item = menuItems.find(i => i.name === itemName);
-                        return item ? (
-                            <li key={itemName}>
-                                {itemName} — €{item.price} × {qty} = €{item.price * qty}
+                        if (!item) return null;
+                        return (
+                            <li key={itemName} className="bill-row">
+                                <span>{item.name}</span>
+                                <span>€{item.price}</span>
+                                <span>{qty}</span>
+                                <span>€{item.price * qty}</span>
                             </li>
-                        ) : null;
+                        );
                     })}
                 </ul>
-                <p><strong>Total:</strong> €{total}</p>
+
+                <p className="bill-total"><strong>Total:</strong> €{total}</p>
 
                 {isProcessing ? (
                     <p>Processing payment...</p>
@@ -36,10 +47,12 @@ function Payment({
                     <>
                         <p>Select Payment Method:</p>
                         <div>
-                            <button onClick={() => onConfirm("Card")}>Card</button>
-                            <button onClick={() => onConfirm("Cash")}>Cash</button>
+                            <div className="pay-type">
+                                <button onClick={() => onConfirm("Card")}>Card</button>
+                                <button onClick={() => onConfirm("Cash")}>Cash</button>
+                            </div>
+                            <button className="bill-cancel" onClick={onCancel}>Cancel</button>
                         </div>
-                        <button onClick={onCancel}>Cancel</button>
                     </>
                 )}
             </div>

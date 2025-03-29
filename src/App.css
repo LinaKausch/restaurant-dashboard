@@ -94,9 +94,12 @@ nav {
     cursor: pointer;
 }
 
-.modal-content p,
 .modal-content h2 {
     margin-bottom: 2rem;
+}
+
+.modal-content p {
+    padding-bottom: 1rem;
 }
 
 .order-list {
@@ -120,13 +123,54 @@ nav {
     border-bottom: none;
 }
 
-.order-count span{
+.order-count span {
     padding: 0 1rem;
 }
 
-.order-send{
+.order-send {
     display: flex;
     justify-self: center;
+}
+
+.bill-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.bill-total {
+    text-align: end;
+    padding-right: 3rem;
+}
+
+.bill-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+}
+
+.header {
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+}
+
+.pay-type button {
+    margin-right: 2rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.bill-cancel {
+    margin-top: 1rem;
+    display: flex;
+    justify-self: center;
+}
+
+.pay-type{
+    border-bottom: 2px solid #ccc;
 }
 
 .switch {
@@ -204,7 +248,9 @@ input:checked+.slider:before {
     justify-content: space-evenly;
 }
 
-.table-buttons button, .order-send{
+.table-buttons button,
+.order-send,
+.pay-type button {
     padding: 1rem;
     font-weight: bold;
     border-radius: 6px;
@@ -222,7 +268,8 @@ input:checked+.slider:before {
 }
 
 .table-settings button,
-.toggle-settings-btn {
+.toggle-settings-btn,
+.bill-cancel {
     padding: 0.5rem;
     font-weight: bold;
     border-radius: 6px;
