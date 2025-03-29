@@ -140,7 +140,7 @@ function App() {
       <nav>
         <ul className="nav">
           <li><Link to="/">Dashboard</Link></li>
-          <li><Link to="/menu">Menu(kitchen)</Link></li>
+          <li><Link to="/menu">Menu (kitchen)</Link></li>
           <li><Link to="/leaderboard">Leaderboard</Link></li>
         </ul>
       </nav>

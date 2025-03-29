@@ -3,6 +3,7 @@ body {
     font-size: 1rem;
     line-height: 1.2rem;
     padding: 1rem;
+    background-color:rgb(206, 213, 205)
 }
 
 strong {
@@ -378,4 +379,76 @@ input:checked+.slider:before {
 .menu-price {
     color: #666;
     font-size: 0.95rem;
+}
+
+.fame-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.fame-grid div {
+    background-color: #f9f9f9;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    min-width: 10rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fame-grid img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.fame-grid h3 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #444;
+    padding-bottom: 2rem;
+}
+
+.fame-grid p {
+    font-size: 1rem;
+    font-weight: bold;
+padding-top: 1rem;
+    color: #333;
+}
+
+.leaderboard-title {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.leaderboard-note{
+    text-align: center;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.leaderboard-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.leaderboard-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
 }

@@ -28,8 +28,9 @@ const Leaderboard = ({ waitersStats }) => {
 
     return (
         <div>
-            <h2>Leaderboard</h2>
-            <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "2rem" }}>
+            <h2 className="leaderboard-title">Leaderboard</h2>
+            <p className="leaderboard-note">Stats appear after a waiter has completed at least one paid table. </p>
+            <div className="fame-grid">
                 <div>
                     <h3>The Cash Collector</h3>
                     {topRevenue ? (
@@ -84,7 +85,8 @@ const Leaderboard = ({ waitersStats }) => {
                 </div>
             </div>
 
-            <table>
+            <table className="leaderboard-table">
+
                 <thead>
                     <tr>
                         <th>Waiter</th>
