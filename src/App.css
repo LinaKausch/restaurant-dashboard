@@ -2,16 +2,61 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1rem;
     line-height: 1.2rem;
+    padding: 1rem;
 }
 
 strong {
     font-weight: bold;
 }
 
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.title {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 h4 {
     font-weight: bold;
     font-size: 1.2rem;
     padding: 0.5rem 0;
+}
+
+nav {
+    margin-top: 1rem;
+    background-color: #f4f4f4;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.nav {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.nav a:hover {
+    color: #0077cc;
 }
 
 .modal-overlay {
@@ -112,7 +157,8 @@ input:checked+.slider:before {
 }
 
 .table-number {
-    font-size: 2rem;
+    font-weight: bold;
+    font-size: 1.7rem;
     padding-bottom: 1rem;
 }
 
@@ -122,7 +168,7 @@ input:checked+.slider:before {
     justify-content: space-evenly;
 }
 
-.table-buttons button{
+.table-buttons button {
     padding: 1rem;
     font-weight: bold;
     border-radius: 6px;
@@ -130,6 +176,7 @@ input:checked+.slider:before {
     background-color: #bbbaba;
     cursor: pointer;
 }
+
 .table-buttons button:hover {
     background-color: #ddd;
 }
@@ -138,8 +185,9 @@ input:checked+.slider:before {
     padding-top: 0.5rem;
 }
 
-.table-settings button, .toggle-settings-btn{
-padding: 0.5rem;
+.table-settings button,
+.toggle-settings-btn {
+    padding: 0.5rem;
     font-weight: bold;
     border-radius: 6px;
     border: none;
@@ -155,7 +203,7 @@ padding: 0.5rem;
     padding: 0.2rem;
 }
 
-.waiter-choice{
+.waiter-choice {
     padding: 0.5rem 0;
 }
 
@@ -166,4 +214,14 @@ padding: 0.5rem;
 .toggle-settings-btn {
     display: flex;
     justify-self: center;
+}
+
+.table-list {
+    max-width: 80rem;
+    margin: auto;
+}
+
+.table-list h2 {
+    text-align: center;
+    padding: 2rem;
 }

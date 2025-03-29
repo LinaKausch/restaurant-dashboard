@@ -17,6 +17,7 @@ function App() {
       { number: 1, waiter: "", numPeople: 0, orders: {} },
       { number: 2, waiter: "", numPeople: 0, orders: {} },
       { number: 3, waiter: "", numPeople: 0, orders: {} },
+      { number: 4, waiter: "", numPeople: 0, orders: {} },
     ];
   });
 
@@ -34,7 +35,7 @@ function App() {
     ];
   });
 
-  const [waitersStats, setWaitersStats] = useState(() =>{
+  const [waitersStats, setWaitersStats] = useState(() => {
     const saved = localStorage.getItem("waitersStats");
     if (!saved || saved === "undefined") return {};
     return JSON.parse(saved);
@@ -135,8 +136,9 @@ function App() {
 
   return (
     <Router basename="/restaurant-dashboard">
+      <h1 className="title">Maître d'hôtel</h1>
       <nav>
-        <ul>
+        <ul className="nav">
           <li><Link to="/">Dashboard</Link></li>
           <li><Link to="/menu">Menu(kitchen)</Link></li>
           <li><Link to="/leaderboard">Leaderboard</Link></li>
@@ -144,7 +146,6 @@ function App() {
       </nav>
 
       <div>
-        <h1>Maître d'hôtel</h1>
         <Routes>
           <Route
             path="/"
