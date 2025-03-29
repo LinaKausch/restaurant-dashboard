@@ -52,24 +52,24 @@ function Order({ orderingTable, tables, setTables, menuItems }) {
 
     return (
         <div>
-            <h2>Menu</h2>
-            <h2>Ordering for Table {orderingTable}</h2>
-
-            <ul>
+            <h2>Ordering for Table #{orderingTable}</h2>
+            <ul className="order-list">
                 {menuItems
-                .filter(item => item.available)
-                .map((item) => {
-                    const orderCount = currentTable?.orders[item.name] || 0;
+                    .filter(item => item.available)
+                    .map((item) => {
+                        const orderCount = currentTable?.orders[item.name] || 0;
 
-                    return (
-                        <li key={item.id}>
-                            {item.name} - €{item.price}
-                            <button onClick={() => addOrder(item.name)}>➕</button>
-                            <button onClick={() => removeOrder(item.name)}>➖</button>
-                            <span> {orderCount}</span>
-                        </li>
-                    );
-                })}
+                        return (
+                            <li key={item.id}>
+                                {item.name}
+                                <div className="order-count">
+                                    <button onClick={() => removeOrder(item.name)}>➖</button>
+                                    <span> x {orderCount}</span>
+                                    <button onClick={() => addOrder(item.name)}>➕</button>
+                                </div>
+                            </li>
+                        );
+                    })}
             </ul>
         </div>
     );

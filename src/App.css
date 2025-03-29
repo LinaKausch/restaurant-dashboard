@@ -77,10 +77,11 @@ nav {
     padding: 2rem;
     border-radius: 10px;
     width: 80%;
-    max-width: 600px;
+    max-width: 30rem;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .modal-close {
@@ -91,6 +92,41 @@ nav {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.modal-content p,
+.modal-content h2 {
+    margin-bottom: 2rem;
+}
+
+.order-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-list li {
+    padding: 0.5rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: 1px dashed #eee;
+}
+
+.order-list li:last-child {
+    border-bottom: none;
+}
+
+.order-count span{
+    padding: 0 1rem;
+}
+
+.order-send{
+    display: flex;
+    justify-self: center;
 }
 
 .switch {
@@ -168,7 +204,7 @@ input:checked+.slider:before {
     justify-content: space-evenly;
 }
 
-.table-buttons button {
+.table-buttons button, .order-send{
     padding: 1rem;
     font-weight: bold;
     border-radius: 6px;

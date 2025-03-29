@@ -28,10 +28,10 @@ function App() {
       { id: 1, name: "Steak", price: 20, available: true },
       { id: 2, name: "Pasta", price: 15, available: true },
       { id: 3, name: "Salad", price: 10, available: false },
-      { id: 5, name: "Soup", price: 7, available: false },
-      { id: 10, name: "Ice Cream", price: 6, available: true },
-      { id: 4, name: "Wine", price: 8, available: true },
-      { id: 14, name: "Coffee", price: 2, available: true },
+      { id: 4, name: "Soup", price: 7, available: false },
+      { id: 5, name: "Ice Cream", price: 6, available: true },
+      { id: 6, name: "Wine", price: 8, available: true },
+      { id: 7, name: "Coffee", price: 2, available: true },
     ];
   });
 
@@ -185,6 +185,7 @@ function App() {
                 setTables={setTables}
                 menuItems={menuItems}
               />
+              <button className="order-send" onClick={closeOrder}>Confirm</button>
             </div>
           </div>
         )}
