@@ -4,6 +4,7 @@ import TableList from "./components/TableList";
 import Order from "./components/Order";
 import Menu from "./components/Menu";
 import Leaderboard from "./components/Leaderboard";
+import "./App.css";
 
 
 function App() {
@@ -127,8 +128,20 @@ function App() {
           />
         </Routes>
         {orderingTable !== null && (
-          <Order orderingTable={orderingTable} tables={tables} setTables={setTables} menuItems={menuItems} closeOrder={closeOrder} />
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <button className="modal-close" onClick={() => setOrderingTable(null)}>❌</button>
+              <Order
+                orderingTable={orderingTable}
+                tables={tables}
+                setTables={setTables}
+                menuItems={menuItems}
+                closeOrder={closeOrder}
+              />
+            </div>
+          </div>
         )}
+
       </div>
     </Router>
   );
