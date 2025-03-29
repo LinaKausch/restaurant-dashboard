@@ -32,41 +32,47 @@ function Menu({ menuItems, setMenuItems }) {
     };
 
     return (
-        <div>
-            <h2>Menu</h2>
-            <ul>
-                {menuItems.map(item => {
-                    return (
-                        <li key={item.id}>
-                            {item.name} - €{item.price}
+        <div className="menu-page">
+            <div className="menu">
+                <h2>Menu</h2>
+                <p>Toggle on/off - availability of the dish </p>
+                <div className="menu-grid">
+                    {menuItems.map(item => (
+                        <div key={item.id} className="menu-card">
+                            <div className="menu-info">
+                                <span className="menu-name">{item.name}</span>
+                                <span className="menu-price">€{item.price}</span>
+                            </div>
                             <label className="switch">
                                 <input
                                     type="checkbox"
                                     checked={item.available}
                                     onChange={() => toggleAvailability(item.id)}
                                 />
-                                <span className="slider">
-                                </span>
+                                <span className="slider" />
                             </label>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div>
-                <h2>Add meals of the week</h2>
-                <input
-                    type="text"
-                    placeholder="Item name"
-                    value={newMenuItem}
-                    onChange={(e) => setNewMenuItem(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Price"
-                    value={newItemPrice}
-                    onChange={(e) => setNewItemPrice(e.target.value)}
-                />
-                <button onClick={addMenuItem}>Add Item</button>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="add-meals">
+                <h2>Add a dish</h2>
+                <p>Add new dish to the menu</p>
+                <div className="add-form">
+                    <input
+                        type="text"
+                        placeholder="Item name"
+                        value={newMenuItem}
+                        onChange={(e) => setNewMenuItem(e.target.value)}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Price"
+                        value={newItemPrice}
+                        onChange={(e) => setNewItemPrice(e.target.value)}
+                    />
+                    <button onClick={addMenuItem}>Add Item</button>
+                </div>
             </div>
         </div>
     );
