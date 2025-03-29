@@ -56,7 +56,7 @@ function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, update
                             const menuItem = menuItems.find(item => item.name === orderName);
                             return menuItem ? (
                                 <li key={orderName}>
-                                    {orderName} - ${menuItem.price} x {quantity} = ${menuItem.price * quantity}
+                                    {orderName} - €{menuItem.price} x {quantity} = ${menuItem.price * quantity}
                                 </li>
                             ) : null;
                         })
@@ -66,7 +66,7 @@ function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, update
                 </ul>
             </div>
             <div>
-                <p><strong>Total Bill: ${calculateTotalBill()}</strong></p>
+                <p><strong>Total Bill: €{calculateTotalBill()}</strong></p>
             </div>
 
             {Object.keys(table.orders).length > 0 && (

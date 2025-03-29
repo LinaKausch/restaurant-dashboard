@@ -39,7 +39,7 @@ function Menu({ menuItems, setMenuItems }) {
                 {menuItems.map(item => {
                     return (
                         <li key={item.id}>
-                            {item.name} - ${item.price}
+                            {item.name} - €{item.price}
                             <label className="switch">
                                 <input
                                     type="checkbox"

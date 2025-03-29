@@ -2,24 +2,22 @@ import React from "react";
 
 const Leaderboard = ({ waitersStats }) => {
     const waiterImages = {
-        Alice: "https://i.pravatar.cc/150?img=1",
-        Bob: "https://i.pravatar.cc/150?img=2",
-        Charlie: "https://i.pravatar.cc/150?img=3",
-        Diana: "https://i.pravatar.cc/150?img=4",
-        Ethan: "https://i.pravatar.cc/150?img=5",
+        Alice: "https://i.pravatar.cc/150?img=49",
+        Bob: "https://i.pravatar.cc/150?img=59",
+        Charlie: "https://i.pravatar.cc/150?img=12",
+        Diana: "https://i.pravatar.cc/150?img=45",
+        Ethan: "https://i.pravatar.cc/150?img=53",
     };
-
-    const sorted = Object.entries(waitersStats).sort((a, b) => b[1].totalRevenue - a[1].totalRevenue);
 
     const getTopWaiter = (statKey) => {
         let top = null;
 
-        for (const [name, stats] of Object.entries(waitersStats)) {
+        for (const name in waitersStats) {
+            const stats = waitersStats[name];
             if (!top || stats[statKey] > top.value) {
-                top = { name, value: stats[statKey] };
+                top = { name: name, value: stats[statKey] };
             }
         }
-
         return top;
     };
 
@@ -28,13 +26,12 @@ const Leaderboard = ({ waitersStats }) => {
     const topTables = getTopWaiter("tablesServed");
     const topBill = getTopWaiter("mostExpensiveTable");
 
-
     return (
         <div>
             <h2>Leaderboard</h2>
             <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "2rem" }}>
                 <div>
-                    <h3>💰 The Money Machine</h3>
+                    <h3>The Cash Collector</h3>
                     {topRevenue ? (
                         <>
                             <img
@@ -43,52 +40,44 @@ const Leaderboard = ({ waitersStats }) => {
                                 style={{ width: "80px", borderRadius: "50%", marginBottom: "0.5rem" }}
                             />
                             <p>{topRevenue.name} — ${topRevenue.value}</p>
-
-                            <p>{topBill.name} — ${topBill.value}</p>
                         </>
                     ) : <p>–</p>}
                 </div>
                 <div>
-                    <h3>👥 The People Person</h3>
+                    <h3>The Social Ninja</h3>
                     {topGuests ? (
                         <>
                             <img
-                                src={waiterImages[topRevenue.name]}
-                                alt={topRevenue.name}
+                                src={waiterImages[topGuests.name]}
+                                alt={topGuests.name}
                                 style={{ width: "80px", borderRadius: "50%", marginBottom: "0.5rem" }}
                             />
-                            <p>{topRevenue.name} — ${topRevenue.value}</p>
-
-                            <p>{topBill.name} — ${topBill.value}</p>
+                            <p>{topGuests.name} — {topGuests.value}</p>
                         </>
                     ) : <p>–</p>}
                 </div>
                 <div>
-                    <h3>🍽️ The Table Titan</h3>
+                    <h3>The Table Wizard</h3>
                     {topTables ? (
                         <>
                             <img
-                                src={waiterImages[topRevenue.name]}
-                                alt={topRevenue.name}
+                                src={waiterImages[topTables.name]}
+                                alt={topTables.name}
                                 style={{ width: "80px", borderRadius: "50%", marginBottom: "0.5rem" }}
                             />
-                            <p>{topRevenue.name} — ${topRevenue.value}</p>
-
-                            <p>{topBill.name} — ${topBill.value}</p>
+                            <p>{topTables.name} — {topTables.value}</p>
                         </>
                     ) : <p>–</p>}
                 </div>
                 <div>
-                    <h3>💎 The Big Spender</h3>
+                    <h3>The Menu Whisperer</h3>
                     {topBill ? (
                         <>
                             <img
-                                src={waiterImages[topRevenue.name]}
-                                alt={topRevenue.name}
+                                src={waiterImages[topBill.name]}
+                                alt={topBill.name}
                                 style={{ width: "80px", borderRadius: "50%", marginBottom: "0.5rem" }}
                             />
-                            <p>{topRevenue.name} — ${topRevenue.value}</p>
-
                             <p>{topBill.name} — ${topBill.value}</p>
                         </>
                     ) : <p>–</p>}
@@ -99,20 +88,20 @@ const Leaderboard = ({ waitersStats }) => {
                 <thead>
                     <tr>
                         <th>Waiter</th>
-                        <th>💰 Revenue</th>
-                        <th>👥 Guests</th>
-                        <th>🍽️ Tables</th>
-                        <th>💎 Biggest Bill</th>
+                        <th>Total bill</th>
+                        <th>Guests served</th>
+                        <th>Tables served</th>
+                        <th>Biggest Bill</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {sorted.map(([name, stats]) => (
+                    {Object.entries(waitersStats).map(([name, stats]) => (
                         <tr key={name}>
                             <td>{name}</td>
-                            <td>${stats.totalRevenue}</td>
+                            <td>€{stats.totalRevenue}</td>
                             <td>{stats.guestsServed}</td>
                             <td>{stats.tablesServed}</td>
-                            <td>${stats.mostExpensiveTable}</td>
+                            <td>€{stats.mostExpensiveTable}</td>
                         </tr>
                     ))}
                 </tbody>

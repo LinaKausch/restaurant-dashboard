@@ -63,7 +63,7 @@ function Order({ orderingTable, tables, setTables, menuItems }) {
 
                     return (
                         <li key={item.id}>
-                            {item.name} - ${item.price}
+                            {item.name} - €{item.price}
                             <button onClick={() => addOrder(item.name)}>➕</button>
                             <button onClick={() => removeOrder(item.name)}>➖</button>
                             <span> {orderCount}</span>
