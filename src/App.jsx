@@ -4,6 +4,7 @@ import TableList from "./components/TableList";
 import Order from "./components/Order";
 import Menu from "./components/Menu";
 import Leaderboard from "./components/Leaderboard";
+import "./reset.css";
 import "./App.css";
 import Bill from "./components/Bill";
 
