@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TableList from "./components/TableList";
 import Order from "./components/Order";
@@ -8,23 +8,35 @@ import "./App.css";
 
 
 function App() {
-  const [tables, setTables] = useState([
-    { number: 1, waiter: "", numPeople: 0, orders: {} },
-    { number: 2, waiter: "", numPeople: 0, orders: {} },
-    { number: 3, waiter: "", numPeople: 0, orders: {} },
-  ]);
+  const [tables, setTables] = useState(() => {
+    const saved = localStorage.getItem('tables');
+    const initialValue = JSON.parse(saved);
+    return initialValue || [
+      { number: 1, waiter: "", numPeople: 0, orders: {} },
+      { number: 2, waiter: "", numPeople: 0, orders: {} },
+      { number: 3, waiter: "", numPeople: 0, orders: {} },
+    ];
+  });
 
-  const [menuItems, setMenuItems] = useState([
-    { id: 1, name: "Steak", price: 20, available: true },
-    { id: 2, name: "Pasta", price: 15, available: true },
-    { id: 3, name: "Salad", price: 10, available: false },
-    { id: 5, name: "Soup", price: 7, available: false },
-    { id: 10, name: "Ice Cream", price: 6, available: true },
-    { id: 4, name: "Wine", price: 8, available: true },
-    { id: 14, name: "Coffee", price: 2, available: true },
-  ]);
+  const [menuItems, setMenuItems] = useState(() => {
+    const saved = localStorage.getItem('menuItems');
+    const initialValue = JSON.parse(saved);
+    return initialValue || [
+      { id: 1, name: "Steak", price: 20, available: true },
+      { id: 2, name: "Pasta", price: 15, available: true },
+      { id: 3, name: "Salad", price: 10, available: false },
+      { id: 5, name: "Soup", price: 7, available: false },
+      { id: 10, name: "Ice Cream", price: 6, available: true },
+      { id: 4, name: "Wine", price: 8, available: true },
+      { id: 14, name: "Coffee", price: 2, available: true },
+    ];
+  });
 
-  const [waitersStats, setWaitersStats] = useState({});
+  const [waitersStats, setWaitersStats] = useState(() =>{
+    const saved = localStorage.getItem("waitersStats");
+    if (!saved || saved === "undefined") return {};
+    return JSON.parse(saved);
+  });
 
   const waiters = ["Alice", "Bob", "Charlie", "Diana", "Ethan"];
 
@@ -87,6 +99,19 @@ function App() {
     );
   };
 
+  useEffect(() => {
+    localStorage.setItem("tables", JSON.stringify(tables));
+  }, [tables]);
+
+  useEffect(() => {
+    localStorage.setItem("menuItems", JSON.stringify(menuItems));
+  }, [menuItems]);
+
+  useEffect(() => {
+    localStorage.setItem("waitersStats", JSON.stringify(waitersStats));
+  }, [waitersStats]);
+
+
 
   return (
     <Router basename="/restaurant-dashboard">
@@ -130,13 +155,12 @@ function App() {
         {orderingTable !== null && (
           <div className="modal-overlay">
             <div className="modal-content">
-              <button className="modal-close" onClick={() => setOrderingTable(null)}>❌</button>
+              <button className="modal-close" onClick={closeOrder}>❌</button>
               <Order
                 orderingTable={orderingTable}
                 tables={tables}
                 setTables={setTables}
                 menuItems={menuItems}
-                closeOrder={closeOrder}
               />
             </div>
           </div>
