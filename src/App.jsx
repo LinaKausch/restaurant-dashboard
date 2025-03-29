@@ -5,6 +5,7 @@ import Order from "./components/Order";
 import Menu from "./components/Menu";
 import Leaderboard from "./components/Leaderboard";
 import "./App.css";
+import Bill from "./components/Bill";
 
 
 function App() {
@@ -40,8 +41,11 @@ function App() {
 
   const waiters = ["Alice", "Bob", "Charlie", "Diana", "Ethan"];
 
-
   const [orderingTable, setOrderingTable] = useState(null);
+  const [payingTable, setPayingTable] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+
 
   const openOrder = (tableNumber) => setOrderingTable(tableNumber);
   const closeOrder = () => setOrderingTable(null);
@@ -55,6 +59,19 @@ function App() {
       )
     );
   };
+
+  const confirmPayment = (method) => {
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      handlePay(payingTable);
+      clearTable(payingTable);
+      setPayingTable(null);
+      setIsProcessing(false);
+      console.log(`Paid with ${method}`);
+    }, 2000);
+  };
+
 
   const handlePay = (tableNumber) => {
     const table = tables.find(t => t.number === tableNumber);
@@ -89,7 +106,9 @@ function App() {
     });
 
     console.log(waitersStats);
+  };
 
+  const clearTable = (tableNumber) => {
     setTables(prev =>
       prev.map(table =>
         table.number === tableNumber
@@ -117,8 +136,8 @@ function App() {
     <Router basename="/restaurant-dashboard">
       <nav>
         <ul>
-          <li><Link to="/">Table List</Link></li>
-          <li><Link to="/menu">Menu</Link></li>
+          <li><Link to="/">Dashboard</Link></li>
+          <li><Link to="/menu">Menu(kitchen)</Link></li>
           <li><Link to="/leaderboard">Leaderboard</Link></li>
         </ul>
       </nav>
@@ -137,6 +156,8 @@ function App() {
                 openOrder={openOrder}
                 handlePay={handlePay}
                 updateNumPeople={updateNumPeople}
+                setPayingTable={setPayingTable}
+                clearTable={clearTable}
               />
             }
           />
@@ -155,7 +176,7 @@ function App() {
         {orderingTable !== null && (
           <div className="modal-overlay">
             <div className="modal-content">
-              <button className="modal-close" onClick={closeOrder}>❌</button>
+              <button className="modal-close" onClick={closeOrder}>X</button>
               <Order
                 orderingTable={orderingTable}
                 tables={tables}
@@ -165,7 +186,15 @@ function App() {
             </div>
           </div>
         )}
-
+        {payingTable !== null && (
+          <Bill
+            table={tables.find(t => t.number === payingTable)}
+            menuItems={menuItems}
+            onCancel={() => setPayingTable(null)}
+            onConfirm={confirmPayment}
+            isProcessing={isProcessing}
+          />
+        )}
       </div>
     </Router>
   );

@@ -10,7 +10,7 @@ function Menu({ menuItems, setMenuItems }) {
         if (!newMenuItem || !newItemPrice) return;
 
         const newItem = {
-            id: Date.now(),
+            id: menuItems.length + 1,
             name: newMenuItem,
             price: parseFloat(newItemPrice),
         };
@@ -31,7 +31,6 @@ function Menu({ menuItems, setMenuItems }) {
         );
     };
 
-
     return (
         <div>
             <h2>Menu</h2>
@@ -49,10 +48,6 @@ function Menu({ menuItems, setMenuItems }) {
                                 <span className="slider">
                                 </span>
                             </label>
-                            {/* {item.available ? " ✅" : " ❌"}
-                            <button onClick={() => toggleAvailability(item.id)}>
-                                {item.available ? "Mark Unavailable" : "Mark Available"}
-                            </button> */}
                         </li>
                     )
                 })}

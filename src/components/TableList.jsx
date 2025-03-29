@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./Table";
 
-function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, handlePay, updateNumPeople, waiters }) {
+function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, handlePay, updateNumPeople, waiters, setPayingTable, clearTable}) {
 
   const assignWaiter = (name, tableNumber) => {
     setTables((prevTables) =>
@@ -30,6 +30,8 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, 
           onOrderClick={() => openOrder(table.number)}
           openOrder={openOrder}
           handlePay={handlePay}
+          setPayingTable={setPayingTable}
+          clearTable={clearTable}
         />
       ))}
     </div>

@@ -1,6 +1,15 @@
 import React from "react";
 
-function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, updateNumPeople, waiters }) {
+function Table({
+    table,
+    assignWaiter,
+    menuItems,
+    onOrderClick,
+    setPayingTable,
+    updateNumPeople,
+    waiters,
+    clearTable
+}) {
 
     const calculateTotalBill = () => {
         return Object.entries(table.orders).reduce((total, [orderName, quantity]) => {
@@ -22,7 +31,11 @@ function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, update
                 onClick={onOrderClick}
                 disabled={!table.waiter || table.numPeople <= 0}
             >
-                Add Order
+                {Object.keys(table.orders).length > 0 ? "Update Order" : "Add Order"}
+            </button>
+
+            <button onClick={() => clearTable(table.number)}>
+                Cancel Table
             </button>
 
             <label>Assign Waiter:</label>
@@ -48,29 +61,11 @@ function Table({ table, assignWaiter, menuItems, onOrderClick, handlePay, update
                 />
             </div>
             <div>
-                <p>Order:</p>
-
-                <ul>
-                    {Object.entries(table.orders).length > 0 ? (
-                        Object.entries(table.orders).map(([orderName, quantity]) => {
-                            const menuItem = menuItems.find(item => item.name === orderName);
-                            return menuItem ? (
-                                <li key={orderName}>
-                                    {orderName} - €{menuItem.price} x {quantity} = ${menuItem.price * quantity}
-                                </li>
-                            ) : null;
-                        })
-                    ) : (
-                        <p>No orders yet</p>
-                    )}
-                </ul>
-            </div>
-            <div>
                 <p><strong>Total Bill: €{calculateTotalBill()}</strong></p>
             </div>
 
             {Object.keys(table.orders).length > 0 && (
-                <button onClick={() => handlePay(table.number)}>💸 Pay & Clear Table</button>
+                <button onClick={() => setPayingTable(table.number)}>Bill</button>
             )}
         </div>
     );

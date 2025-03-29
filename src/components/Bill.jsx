@@ -1,0 +1,50 @@
+import React from "react";
+// import "./Modal.css"; // optional: reuse styles from App.css
+
+function Payment({
+    table,
+    menuItems,
+    onCancel,
+    onConfirm,
+    isProcessing
+}) {
+    const total = Object.entries(table.orders).reduce((sum, [name, qty]) => {
+        const item = menuItems.find(m => m.name === name);
+        return item ? sum + item.price * qty : sum;
+    }, 0);
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2>Bill</h2>
+                <h3>Order Summary:</h3>
+                <ul>
+                    {Object.entries(table.orders).map(([itemName, qty]) => {
+                        const item = menuItems.find(i => i.name === itemName);
+                        return item ? (
+                            <li key={itemName}>
+                                {itemName} — €{item.price} × {qty} = €{item.price * qty}
+                            </li>
+                        ) : null;
+                    })}
+                </ul>
+                <p><strong>Total:</strong> €{total}</p>
+
+                {isProcessing ? (
+                    <p>Processing payment...</p>
+                ) : (
+                    <>
+                        <p>Select Payment Method:</p>
+                        <div>
+                            <button onClick={() => onConfirm("Card")}>Card</button>
+                            <button onClick={() => onConfirm("Cash")}>Cash</button>
+                        </div>
+                        <button onClick={onCancel}>Cancel</button>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default Payment;
