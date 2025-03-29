@@ -143,7 +143,7 @@ function App() {
       </nav>
 
       <div>
-        <h1>Restaurant Dashboard</h1>
+        <h1>Maître d'hôtel</h1>
         <Routes>
           <Route
             path="/"

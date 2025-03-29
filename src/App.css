@@ -76,3 +76,21 @@ input:checked+.slider {
 input:checked+.slider:before {
     transform: translateX(20px);
 }
+
+.table-card {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.table-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}

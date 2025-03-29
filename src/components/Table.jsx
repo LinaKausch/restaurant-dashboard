@@ -22,10 +22,14 @@ function Table({
     };
 
     return (
-        <div>
-            <h3>Table {table.number}</h3>
+        <div className="table-card">
+            <h3>Table #{table.number}</h3>
             <p>Assigned Waiter: {table.waiter || "No waiter assigned"}</p>
             <p>Guests {table.numPeople} </p>
+
+            <div>
+                <p><strong>Total Bill: €{calculateTotalBill()}</strong></p>
+            </div>
 
             <button
                 onClick={onOrderClick}
@@ -34,9 +38,20 @@ function Table({
                 {Object.keys(table.orders).length > 0 ? "Update Order" : "Add Order"}
             </button>
 
-            <button onClick={() => clearTable(table.number)}>
-                Cancel Table
-            </button>
+            {Object.keys(table.orders).length > 0 && (
+                <button onClick={() => setPayingTable(table.number)}>Bill</button>
+            )}
+
+            <div>
+                <label>Number of Guests: </label>
+                <input
+                    type="number"
+                    value={table.numPeople}
+                    onChange={(e) => updateNumPeople(table.number, e.target.value)}
+                    min="0"
+                    placeholder="Enter number of guests"
+                />
+            </div>
 
             <label>Assign Waiter:</label>
             <select
@@ -49,25 +64,11 @@ function Table({
                 ))}
             </select>
 
-
-            <div>
-                <label>Number of Guests: </label>
-                <input
-                    type="number"
-                    value={table.numPeople}
-                    onChange={(e) => updateNumPeople(table.number, e.target.value)}
-                    min="0"
-                    placeholder="Enter number of guests"
-                />
-            </div>
-            <div>
-                <p><strong>Total Bill: €{calculateTotalBill()}</strong></p>
-            </div>
-
-            {Object.keys(table.orders).length > 0 && (
-                <button onClick={() => setPayingTable(table.number)}>Bill</button>
-            )}
+            <button onClick={() => clearTable(table.number)}>
+                Cancel Table
+            </button>
         </div>
+
     );
 }
 

@@ -17,7 +17,8 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, 
 
   return (
     <div>
-      <h2>Tables List</h2>
+      <h2>Tables</h2>
+      <div className="table-grid">
       {tables.map((table) => (
         <Table
           key={table.number}
@@ -34,6 +35,7 @@ function TableList({ tables, setTables, setOrderingTable, menuItems, openOrder, 
           clearTable={clearTable}
         />
       ))}
+      </div>
     </div>
   );
 }
